@@ -62,11 +62,11 @@ namespace Smmalloc {
 			Dispose(false);
 		}
 
-		public void CreateThreadCache(CacheWarmupOptions warmupOptions, int cacheSize) {
+		public void CreateThreadCache(int cacheSize, CacheWarmupOptions warmupOption) {
 			if (cacheSize == 0 || cacheSize < 0)
 				throw new ArgumentOutOfRangeException();
 
-			Native.sm_allocator_thread_cache_create(nativeAllocator, warmupOptions, (IntPtr)cacheSize);
+			Native.sm_allocator_thread_cache_create(nativeAllocator, warmupOption, (IntPtr)cacheSize);
 		}
 
 		public void DestroyThreadCache() {
@@ -152,7 +152,7 @@ namespace Smmalloc {
 		internal static extern void sm_allocator_destroy(IntPtr allocator);
 
 		[DllImport(nativeLibrary, CallingConvention = CallingConvention.Cdecl)]
-		internal static extern void sm_allocator_thread_cache_create(IntPtr allocator, CacheWarmupOptions warmupOptions, IntPtr cacheSize);
+		internal static extern void sm_allocator_thread_cache_create(IntPtr allocator, CacheWarmupOptions warmupOption, IntPtr cacheSize);
 
 		[DllImport(nativeLibrary, CallingConvention = CallingConvention.Cdecl)]
 		internal static extern void sm_allocator_thread_cache_destroy(IntPtr allocator);
