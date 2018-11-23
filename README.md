@@ -32,7 +32,7 @@ smmalloc.CreateThreadCache(CacheWarmupOptions.Hot, 4 * 1024);
 smmalloc.DestroyThreadCache();
 ```
 
-##### Allocate aligned memory block:
+##### Allocate memory block:
 ```c#
 // 64 bytes of a memory block
 IntPtr pointer = smmalloc.Malloc(64);
@@ -118,11 +118,11 @@ API reference
 #### CacheWarmupOptions
 Definitions of warmup options for `CreateThreadCache()` function:
 
-`CacheWarmupOptions.Cold` 
+`CacheWarmupOptions.Cold` warmup not performs for cache elements.
 
-`CacheWarmupOptions.Warm` 
+`CacheWarmupOptions.Warm` warmup performed for half of the cache elements.
 
-`CacheWarmupOptions.Hot` 
+`CacheWarmupOptions.Hot` warmup performed for all cache elements.
 
 ### Classes
 A single low-level disposable class is used to work with smmalloc. 
@@ -132,21 +132,21 @@ A single low-level disposable class is used to work with smmalloc.
 Contains a managed pointer to the smmalloc instance.
 
 ##### Constructors
-`SmmallocInstance(uint bucketsCount, int bucketSize)` Creates allocator instance with a memory pool. Size of memory blocks in each bucket increases with a count of buckets. The bucket size parameter sets an initial size of a pooled memory in bytes.
+`SmmallocInstance(uint bucketsCount, int bucketSize)` creates allocator instance with a memory pool. Size of memory blocks in each bucket increases with a count of buckets. The bucket size parameter sets an initial size of a pooled memory in bytes.
 
 ##### Methods
-`SmmallocInstance.Dispose()` 
+`SmmallocInstance.Dispose()` destroys the smmalloc instance and frees allocated memory.
 
-`CreateThreadCache(CacheWarmupOptions warmupOptions, int cacheSize)` 
+`SmmallocInstance.CreateThreadCache(int cacheSize, CacheWarmupOptions warmupOption)` creates thread cache for fast memory allocations within a thread. The warmup option sets pre-allocation degree of cache elements.
 
-`DestroyThreadCache()` 
+`SmmallocInstance.DestroyThreadCache()` destroys the thread cache.
 
-`Malloc(int bytesCount, int alignment)` 
+`SmmallocInstance.Malloc(int bytesCount, int alignment)` allocates aligned memory block. The alignment parameter is optional. Returns pointer to a memory block.
 
-`Free(IntPtr memory)` 
+`SmmallocInstance.Free(IntPtr memory)` frees memory block.
 
-`Realloc(IntPtr memory, int bytesCount, int alignment)` 
+`SmmallocInstance.Realloc(IntPtr memory, int bytesCount, int alignment)` reallocates memory block. The alignment parameter is optional. Returns pointer to a reallocated memory block.
 
-`Size(IntPtr memory)` 
+`SmmallocInstance.Size(IntPtr memory)` gets usable memory size. Returns size in bytes.
 
-`Bucket(IntPtr memory)` 
+`SmmallocInstance.Bucket(IntPtr memory)` gets bucket index. Returns placement index.
