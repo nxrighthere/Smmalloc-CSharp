@@ -141,7 +141,7 @@ Contains a managed pointer to the smmalloc instance.
 
 `SmmallocInstance.DestroyThreadCache()` destroys the thread cache.
 
-`SmmallocInstance.Malloc(int bytesCount, int alignment)` allocates aligned memory block. Always allocates memory equals to  buckets count multiplied by 16, so the minimal allocation size for a single bucket will be 16 bytes, for two buckets 32 bytes, for three buckets 48 bytes, and so on. The alignment parameter is optional. Returns pointer to a memory block.
+`SmmallocInstance.Malloc(int bytesCount, int alignment)` allocates aligned memory block. Always allocates memory equals to buckets count multiplied by 16, so minimum allocation size for a single bucket will be 16 bytes, for two buckets 32 bytes, for three buckets 48 bytes, and so on. The alignment parameter is optional. Returns pointer to a memory block.
 
 `SmmallocInstance.Free(IntPtr memory)` frees memory block.
 
