@@ -118,7 +118,7 @@ API reference
 #### CacheWarmupOptions
 Definitions of warmup options for `CreateThreadCache()` function:
 
-`CacheWarmupOptions.Cold` warmup not performs for cache elements.
+`CacheWarmupOptions.Cold` warmup not performed for cache elements.
 
 `CacheWarmupOptions.Warm` warmup performed for half of the cache elements.
 
@@ -141,7 +141,7 @@ Contains a managed pointer to the smmalloc instance.
 
 `SmmallocInstance.DestroyThreadCache()` destroys the thread cache.
 
-`SmmallocInstance.Malloc(int bytesCount, int alignment)` allocates aligned memory block. The alignment parameter is optional. Returns pointer to a memory block.
+`SmmallocInstance.Malloc(int bytesCount, int alignment)` allocates aligned memory block. Always allocates memory equals to  buckets count multiplied by 16. The alignment parameter is optional. Returns pointer to a memory block.
 
 `SmmallocInstance.Free(IntPtr memory)` frees memory block.
 
