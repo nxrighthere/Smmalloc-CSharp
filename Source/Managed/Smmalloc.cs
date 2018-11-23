@@ -35,7 +35,7 @@ namespace Smmalloc {
 
 	public class SmmallocInstance : IDisposable {
 		private IntPtr nativeAllocator;
-		private uint allocationLimit;
+		private readonly uint allocationLimit;
 
 		public SmmallocInstance(uint bucketsCount, int bucketSize) {
 			nativeAllocator = Native.sm_allocator_create(bucketsCount, (IntPtr)bucketSize);
