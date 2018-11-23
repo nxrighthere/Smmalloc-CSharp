@@ -149,4 +149,4 @@ Contains a managed pointer to the smmalloc instance.
 
 `SmmallocInstance.Size(IntPtr memory)` gets usable memory size. Returns size in bytes.
 
-`SmmallocInstance.Bucket(IntPtr memory)` gets bucket index. Returns placement index.
+`SmmallocInstance.Bucket(IntPtr memory)` gets bucket index of a memory block. Returns placement index.
