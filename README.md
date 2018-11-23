@@ -6,7 +6,7 @@
 
 This is an improved version of [smmalloc](https://github.com/SergeyMakeev/smmalloc) a [fast and efficient](https://github.com/SergeyMakeev/smmalloc#features) memory allocator designed to handle many small allocations/deallocations in heavy multi-threaded scenarios. The allocator created for using in applications where the performance is critical such as video games.
 
-Using smmalloc allocator in the .NET environment helps to minimize GC pressure for allocating buffers and avoid using lock-based pools in multi-threaded systems. Modern .NET features such as `Span<T>` greatly works in tandem with smmalloc and allows conveniently manage data in native memory.
+Using smmalloc allocator in the .NET environment helps to minimize GC pressure for allocating buffers and avoid using lock-based pools in multi-threaded systems. Modern .NET features such as `Span<T>` greatly works in tandem with smmalloc and allows conveniently manage data in native memory blocks.
 
 Usage
 --------
@@ -64,11 +64,6 @@ byte data = 0;
 for (int i = 0; i < buffer.Length; i++) {
 	buffer[i] = data++;
 }
-```
-
-##### Read data from memory block:
-```c#
-	
 ```
 
 ##### Copy data using memory block:
