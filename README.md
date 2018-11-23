@@ -6,7 +6,7 @@
 
 This is an improved version of [smmalloc](https://github.com/SergeyMakeev/smmalloc) a [fast and efficient](https://github.com/SergeyMakeev/smmalloc#features) memory allocator designed to handle many small allocations/deallocations in heavy multi-threaded scenarios. The allocator created for using in applications where the performance is critical such as video games.
 
-Using smmalloc allocator in the .NET environment helps to minimize GC pressure for allocating buffers and avoid using lock-based pools in multi-threaded systems. Modern .NET features such as `Span<T>` greatly works in tandem with smmalloc and allows conveniently manage data in native memory blocks.
+Using smmalloc allocator in the .NET environment helps to minimize GC pressure for allocating buffers and avoid using lock-based pools in multi-threaded systems. Modern .NET features such as [`Span<T>`](https://msdn.microsoft.com/en-us/magazine/mt814808.aspx) greatly works in tandem with smmalloc and allows conveniently manage data in native memory blocks.
 
 Usage
 --------
@@ -114,3 +114,39 @@ unsafe {
 
 API reference
 --------
+### Enumerations
+#### CacheWarmupOptions
+Definitions of warmup options for `CreateThreadCache()` function:
+
+`CacheWarmupOptions.Cold` 
+
+`CacheWarmupOptions.Warm` 
+
+`CacheWarmupOptions.Hot` 
+
+### Classes
+A single low-level disposable class is used to work with smmalloc. 
+
+#### SmmallocInstance
+
+Contains a managed pointer to the smmalloc instance.
+
+##### Constructors
+`SmmallocInstance(uint bucketsCount, int bucketSize)` Creates allocator instance with a memory pool. Size of memory blocks in each bucket increases with a count of buckets. The bucket size parameter sets an initial size of a pooled memory in bytes.
+
+##### Methods
+`SmmallocInstance.Dispose()` 
+
+`CreateThreadCache(CacheWarmupOptions warmupOptions, int cacheSize)` 
+
+`DestroyThreadCache()` 
+
+`Malloc(int bytesCount, int alignment)` 
+
+`Free(IntPtr memory)` 
+
+`Realloc(IntPtr memory, int bytesCount, int alignment)` 
+
+`Size(IntPtr memory)` 
+
+`Bucket(IntPtr memory)` 
