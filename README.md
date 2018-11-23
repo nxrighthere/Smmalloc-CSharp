@@ -48,7 +48,7 @@ smmalloc.Free(pointer);
 // Using Marshal
 byte data = 0;
 
-for (int i = 0; i < 64; i++) {
+for (int i = 0; i < smmalloc.Size(pointer); i++) {
 	Marshal.WriteByte(pointer, i, data++);
 }
 
@@ -56,13 +56,30 @@ for (int i = 0; i < 64; i++) {
 Span<byte> buffer;
 
 unsafe {
-	buffer = new Span<byte>((byte*)pointer, 64);
+	buffer = new Span<byte>((byte*)pointer, smmalloc.Size(pointer));
 }
 
 byte data = 0;
 
 for (int i = 0; i < buffer.Length; i++) {
 	buffer[i] = data++;
+}
+```
+
+##### Read data from memory block:
+```c#
+// Using Marshal
+int sum = 0;
+
+for (int i = 0; i < smmalloc.Size(pointer); i++) {
+	sum += Marshal.ReadByte(pointer, i);
+}
+
+// Using Span
+int sum = 0;
+
+foreach (var value in buffer) {
+	sum += value;
 }
 ```
 
