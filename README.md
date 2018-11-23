@@ -16,16 +16,31 @@ Usage
 SmmallocInstance smmalloc = new SmmallocInstance(8, 16 * 1024 * 1024);
 ```
 
+##### Destroy the smmalloc instance and free allocated memory:
+```c#
+smmalloc.Dispose();
+```
+
 ##### Create thread cache for a current thread:
 ```c#
 // 4 KB of thread cache for each bucket, hot warmup
 smmalloc.CreateThreadCache(CacheWarmupOptions.Hot, 4 * 1024);
 ```
 
+##### Destroy thread cache for a current thread:
+```c#
+smmalloc.DestroyThreadCache();
+```
+
 ##### Allocate aligned memory block:
 ```c#
 // 64 bytes of a memory block
 IntPtr pointer = smmalloc.Malloc(64);
+```
+
+##### Release memory block:
+```c#
+smmalloc.Free(pointer);
 ```
 
 ##### Write data to memory block:
@@ -53,7 +68,18 @@ for (int i = 0; i < buffer.Length; i++) {
 
 ##### Read data from memory block:
 ```c#
+	
+```
 
+##### Copy data using memory block:
+```c#
+byte[] data = new byte[64];
+
+// Copy from native memory
+Marshal.Copy(pointer, data, 0, 64);
+
+// Copy to native memory
+Marshal.Copy(data, 0, pointer, 64);
 ```
 
 API reference
