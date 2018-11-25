@@ -111,16 +111,12 @@ Marshal.Copy(data, 0, pointer, 64);
 unsafe {
 	// Copy from native memory
 	fixed (byte* destination = &data[0]) {
-		byte* source = (byte*)pointer;
-
-		Buffer.MemoryCopy(source, destination, 64, 64);
+		Buffer.MemoryCopy((byte*)pointer, destination, 64, 64);
 	}
 
 	// Copy to native memory
 	fixed (byte* source = &data[0]) {
-		byte* destination = (byte*)pointer;
-
-		Buffer.MemoryCopy(source, destination, 64, 64);
+		Buffer.MemoryCopy(source, (byte*)pointer, 64, 64);
 	}
 }
 ```
