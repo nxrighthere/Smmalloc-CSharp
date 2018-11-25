@@ -83,6 +83,19 @@ foreach (var value in buffer) {
 }
 ```
 
+##### Hardware accelerated operations:
+```c#
+// Xor using Vector and Span created from native memory block
+if (Vector.IsHardwareAccelerated) {
+	Span<Vector<byte>> bufferVector = MemoryMarshal.Cast<byte, Vector<byte>>(buffer);
+	Span<Vector<byte>> xorVector = MemoryMarshal.Cast<byte, Vector<byte>>(xor);
+
+	for (int i = 0; i < bufferVector.Length; i++) {
+		bufferVector[i] ^= xorVector[i];
+	}
+}
+```
+
 ##### Copy data using memory block:
 ```c#
 // Using Marshal
