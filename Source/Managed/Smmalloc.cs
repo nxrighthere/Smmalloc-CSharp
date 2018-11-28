@@ -74,14 +74,14 @@ namespace Smmalloc {
 		}
 
 		#if SMMALLOC_INLINING
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			[MethodImpl(256)]
 		#endif
 		public IntPtr Malloc(int bytesCount) {
 			return Malloc(bytesCount, 0);
 		}
 
 		#if SMMALLOC_INLINING
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			[MethodImpl(256)]
 		#endif
 		public IntPtr Malloc(int bytesCount, int alignment) {
 			if (bytesCount == 0 || bytesCount < 0 || bytesCount > allocationLimit)
@@ -91,7 +91,7 @@ namespace Smmalloc {
 		}
 
 		#if SMMALLOC_INLINING
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			[MethodImpl(256)]
 		#endif
 		public void Free(IntPtr memory) {
 			if (memory == IntPtr.Zero)
@@ -101,14 +101,14 @@ namespace Smmalloc {
 		}
 
 		#if SMMALLOC_INLINING
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			[MethodImpl(256)]
 		#endif
 		public IntPtr Realloc(IntPtr memory, int bytesCount) {
 			return Realloc(memory, bytesCount, 0);
 		}
 
 		#if SMMALLOC_INLINING
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			[MethodImpl(256)]
 		#endif
 		public IntPtr Realloc(IntPtr memory, int bytesCount, int alignment) {
 			if (memory == IntPtr.Zero)
@@ -121,7 +121,7 @@ namespace Smmalloc {
 		}
 
 		#if SMMALLOC_INLINING
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			[MethodImpl(256)]
 		#endif
 		public int Size(IntPtr memory) {
 			if (memory == IntPtr.Zero)
@@ -131,7 +131,7 @@ namespace Smmalloc {
 		}
 
 		#if SMMALLOC_INLINING
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			[MethodImpl(256)]
 		#endif
 		public int Bucket(IntPtr memory) {
 			if (memory == IntPtr.Zero)
