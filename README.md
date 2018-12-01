@@ -121,6 +121,36 @@ unsafe {
 }
 ```
 
+##### Custom data structures:
+```c#
+struct Entity {
+	public uint id;
+	public byte health;
+	public byte state;
+}
+
+int entitySize = Marshal.SizeOf(typeof(Entity));
+int entityCount = 10;
+
+IntPtr pointer = smmalloc.Malloc(entitySize * entityCount);
+
+Span<Entity> entities;
+
+unsafe {
+	entities = new Span<Entity>((byte*)pointer, entityCount);
+}
+
+uint id = 1;
+
+for (int i = 0; i < entities.Length; i++) {
+	entities[i].id = id++;
+	entities[i].health = (byte)(new Random().Next(1, 100));
+	entities[i].state = (byte)(new Random().Next(1, 255));
+}
+
+smmalloc.Free(pointer);
+```
+
 API reference
 --------
 ### Enumerations
