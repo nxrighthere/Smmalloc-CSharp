@@ -123,6 +123,7 @@ unsafe {
 
 ##### Custom data structures:
 ```c#
+// Define a custom structure
 struct Entity {
 	public uint id;
 	public byte health;
@@ -132,14 +133,17 @@ struct Entity {
 int entitySize = Marshal.SizeOf(typeof(Entity));
 int entityCount = 10;
 
+// Allocate memory block
 IntPtr pointer = smmalloc.Malloc(entitySize * entityCount);
 
+// Create Span using pointer to memory block
 Span<Entity> entities;
 
 unsafe {
 	entities = new Span<Entity>((byte*)pointer, entityCount);
 }
 
+// Do some stuff
 uint id = 1;
 
 for (int i = 0; i < entities.Length; i++) {
@@ -148,6 +152,7 @@ for (int i = 0; i < entities.Length; i++) {
 	entities[i].state = (byte)(new Random().Next(1, 255));
 }
 
+// Release memory block
 smmalloc.Free(pointer);
 ```
 
