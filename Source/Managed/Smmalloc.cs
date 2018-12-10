@@ -38,6 +38,9 @@ namespace Smmalloc {
 		private readonly uint allocationLimit;
 
 		public SmmallocInstance(uint bucketsCount, int bucketSize) {
+			if (bucketsCount > 64)
+				throw new ArgumentOutOfRangeException();
+
 			nativeAllocator = Native.sm_allocator_create(bucketsCount, (IntPtr)bucketSize);
 
 			if (nativeAllocator == IntPtr.Zero)
