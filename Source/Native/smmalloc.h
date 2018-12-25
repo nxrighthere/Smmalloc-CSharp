@@ -263,7 +263,6 @@ namespace sm {
 		INLINE void* AllocFromCache(internal::TlsPoolBucket* __restrict _self) const;
 
 		template<bool useCacheL0>
-
 		INLINE bool ReleaseToCache(internal::TlsPoolBucket* __restrict _self, void* _p);
 
 		INLINE size_t FindBucket(const void* p) const {
@@ -288,7 +287,6 @@ namespace sm {
 		}
 
 		template<bool enableStatistic>
-
 		INLINE void* Allocate(size_t _bytesCount, size_t alignment) {
 			SM_ASSERT(alignment <= MaxValidAlignment);
 
