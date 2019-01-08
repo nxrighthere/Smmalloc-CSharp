@@ -183,7 +183,7 @@ Contains a managed pointer to the smmalloc instance.
 
 `SmmallocInstance.CreateThreadCache(int cacheSize, CacheWarmupOptions warmupOption)` creates thread cache for fast memory allocations within a thread. The warmup option sets pre-allocation degree of cache elements.
 
-`SmmallocInstance.DestroyThreadCache()` destroys the thread cache.
+`SmmallocInstance.DestroyThreadCache()` destroys the thread cache. Should be called before the end of the thread's life cycle.
 
 `SmmallocInstance.Malloc(int bytesCount, int alignment)` allocates aligned memory block. Allocation size depends on buckets count multiplied by 16, so the minimum allocation size is 16 bytes. Maximum allocation size using two buckets in a smmalloc instance will be 32 bytes, for three buckets 48 bytes, for four 64 bytes, and so on. The alignment parameter is optional. Returns pointer to a memory block.
 
