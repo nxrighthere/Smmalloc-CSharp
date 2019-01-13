@@ -172,7 +172,6 @@ Definitions of warmup options for `CreateThreadCache()` function:
 A single low-level disposable class is used to work with smmalloc. 
 
 #### SmmallocInstance
-
 Contains a managed pointer to the smmalloc instance.
 
 ##### Constructors
