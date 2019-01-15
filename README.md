@@ -184,11 +184,11 @@ Contains a managed pointer to the smmalloc instance.
 
 `SmmallocInstance.DestroyThreadCache()` destroys the thread cache. Should be called before the end of the thread's life cycle.
 
-`SmmallocInstance.Malloc(int bytesCount, int alignment)` allocates aligned memory block. Allocation size depends on buckets count multiplied by 16, so the minimum allocation size is 16 bytes. Maximum allocation size using two buckets in a smmalloc instance will be 32 bytes, for three buckets 48 bytes, for four 64 bytes, and so on. The alignment parameter is optional. Returns pointer to a memory block.
+`SmmallocInstance.Malloc(int bytesCount, int alignment)` allocates aligned memory block. Allocation size depends on buckets count multiplied by 16, so the minimum allocation size is 16 bytes. Maximum allocation size using two buckets in a smmalloc instance will be 32 bytes, for three buckets 48 bytes, for four 64 bytes, and so on. The alignment parameter is optional. Returns pointer to a memory block. Returns a pointer to an allocated memory block.
 
 `SmmallocInstance.Free(IntPtr memory)` frees memory block.
 
-`SmmallocInstance.Realloc(IntPtr memory, int bytesCount, int alignment)` reallocates memory block. The alignment parameter is optional. Returns pointer to a reallocated memory block.
+`SmmallocInstance.Realloc(IntPtr memory, int bytesCount, int alignment)` reallocates memory block. The alignment parameter is optional. Returns a pointer to a reallocated memory block.
 
 `SmmallocInstance.Size(IntPtr memory)` gets usable memory size. Returns size in bytes.
 
