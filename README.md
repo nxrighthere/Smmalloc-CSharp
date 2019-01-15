@@ -35,12 +35,12 @@ smmalloc.DestroyThreadCache();
 ##### Allocate memory block:
 ```c#
 // 64 bytes of a memory block
-IntPtr pointer = smmalloc.Malloc(64);
+IntPtr memory = smmalloc.Malloc(64);
 ```
 
 ##### Release memory block:
 ```c#
-smmalloc.Free(pointer);
+smmalloc.Free(memory);
 ```
 
 ##### Write data to memory block:
@@ -48,15 +48,15 @@ smmalloc.Free(pointer);
 // Using Marshal
 byte data = 0;
 
-for (int i = 0; i < smmalloc.Size(pointer); i++) {
-	Marshal.WriteByte(pointer, i, data++);
+for (int i = 0; i < smmalloc.Size(memory); i++) {
+	Marshal.WriteByte(memory, i, data++);
 }
 
 // Using Span
 Span<byte> buffer;
 
 unsafe {
-	buffer = new Span<byte>((byte*)pointer, smmalloc.Size(pointer));
+	buffer = new Span<byte>((byte*)memory, smmalloc.Size(memory));
 }
 
 byte data = 0;
@@ -71,8 +71,8 @@ for (int i = 0; i < buffer.Length; i++) {
 // Using Marshal
 int sum = 0;
 
-for (int i = 0; i < smmalloc.Size(pointer); i++) {
-	sum += Marshal.ReadByte(pointer, i);
+for (int i = 0; i < smmalloc.Size(memory); i++) {
+	sum += Marshal.ReadByte(memory, i);
 }
 
 // Using Span
@@ -102,21 +102,21 @@ if (Vector.IsHardwareAccelerated) {
 byte[] data = new byte[64];
 
 // Copy from native memory
-Marshal.Copy(pointer, data, 0, 64);
+Marshal.Copy(memory, data, 0, 64);
 
 // Copy to native memory
-Marshal.Copy(data, 0, pointer, 64);
+Marshal.Copy(data, 0, memory, 64);
 
 // Using Buffer
 unsafe {
 	// Copy from native memory
 	fixed (byte* destination = &data[0]) {
-		Buffer.MemoryCopy((byte*)pointer, destination, 64, 64);
+		Buffer.MemoryCopy((byte*)memory, destination, 64, 64);
 	}
 
 	// Copy to native memory
 	fixed (byte* source = &data[0]) {
-		Buffer.MemoryCopy(source, (byte*)pointer, 64, 64);
+		Buffer.MemoryCopy(source, (byte*)memory, 64, 64);
 	}
 }
 ```
@@ -134,13 +134,13 @@ int entitySize = Marshal.SizeOf(typeof(Entity));
 int entityCount = 10;
 
 // Allocate memory block
-IntPtr pointer = smmalloc.Malloc(entitySize * entityCount);
+IntPtr memory = smmalloc.Malloc(entitySize * entityCount);
 
-// Create Span using pointer to memory block
+// Create Span using memory to memory block
 Span<Entity> entities;
 
 unsafe {
-	entities = new Span<Entity>((byte*)pointer, entityCount);
+	entities = new Span<Entity>((byte*)memory, entityCount);
 }
 
 // Do some stuff
@@ -153,7 +153,7 @@ for (int i = 0; i < entities.Length; i++) {
 }
 
 // Release memory block
-smmalloc.Free(pointer);
+smmalloc.Free(memory);
 ```
 
 API reference
