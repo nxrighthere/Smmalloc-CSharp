@@ -136,7 +136,7 @@ int entityCount = 10;
 // Allocate memory block
 IntPtr memory = smmalloc.Malloc(entitySize * entityCount);
 
-// Create Span using memory to memory block
+// Create Span using native memory block
 Span<Entity> entities;
 
 unsafe {
