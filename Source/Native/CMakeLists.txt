@@ -5,7 +5,13 @@ set(SMMALLOC_STATIC "0" CACHE BOOL "Create a static library")
 set(SMMALLOC_SHARED "0" CACHE BOOL "Create a shared library")
 set(SMMALLOC_STATS "0" CACHE BOOL "Add support for stats gathering")
 
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -static")
+if (CMAKE_CXX_COMPILER_ID MATCHES GNU)
+	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -static")
+elseif (CMAKE_CXX_COMPILER_ID MATCHES MSVC)
+	set(CMAKE_CXX_FLAGS_RELEASE "/MT")
+elseif (CMAKE_CXX_COMPILER_ID MATCHES Clang)
+	set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
+endif()
 
 include_directories(${PROJECT_SOURCE_DIR})
 
@@ -15,16 +21,10 @@ endif()
 
 if (SMMALLOC_STATIC)
     add_library(smmalloc_static STATIC smmalloc.cpp)
-
-    if (WIN32)
-        target_link_libraries(smmalloc_static)
-    endif()
+    target_link_libraries(smmalloc_static)
 endif()
 
 if (SMMALLOC_SHARED)
     add_library(smmalloc SHARED smmalloc.cpp)
-
-    if (WIN32)
-        target_link_libraries(smmalloc)
-    endif()
+    target_link_libraries(smmalloc)
 endif()
