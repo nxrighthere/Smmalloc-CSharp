@@ -123,7 +123,7 @@ namespace sm {
 
 	void Allocator::CreateThreadCache(CacheWarmupOptions warmupOptions, size_t cacheSize) {
 		for (size_t i = 0; i < bucketsCount; i++) {
-			uint32_t elementsNum = cacheSize + SMM_MAX_CACHE_ITEMS_COUNT;
+			uint32_t elementsNum = (uint32_t)cacheSize + SMM_MAX_CACHE_ITEMS_COUNT;
 			uint32_t* localStack = (uint32_t*)GenericAllocator::Alloc(gAllocator, elementsNum * sizeof(uint32_t), 64);
 			GetTlsBucket(i)->Init(localStack, elementsNum, warmupOptions, this, i);
 
