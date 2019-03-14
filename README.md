@@ -186,7 +186,7 @@ Contains a managed pointer to the smmalloc instance.
 
 `SmmallocInstance.Malloc(int bytesCount, int alignment)` allocates aligned memory block. Allocation size depends on buckets count multiplied by 16, so the minimum allocation size is 16 bytes. Maximum allocation size using two buckets in a smmalloc instance will be 32 bytes, for three buckets 48 bytes, for four 64 bytes, and so on. The alignment parameter is optional. Returns pointer to a memory block. Returns a pointer to an allocated memory block.
 
-`SmmallocInstance.Free(IntPtr memory)` frees memory block. A managed array or pointer to pointers with length can be used to free a batch of memory.
+`SmmallocInstance.Free(IntPtr memory)` frees memory block. A managed array or pointer to pointers with length can be used instead of a pointer to memory block to free a batch of memory.
 
 `SmmallocInstance.Realloc(IntPtr memory, int bytesCount, int alignment)` reallocates memory block. The alignment parameter is optional. Returns a pointer to a reallocated memory block.
 
