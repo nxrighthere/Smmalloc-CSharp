@@ -106,6 +106,26 @@ namespace Smmalloc {
 		#if SMMALLOC_INLINING
 			[MethodImpl(256)]
 		#endif
+		public void Free(IntPtr[] batch) {
+			if (batch == null)
+				throw new ArgumentNullException("batch");
+
+			Native.sm_free_batch(nativeAllocator, batch, (IntPtr)batch.Length);
+		}
+
+		#if SMMALLOC_INLINING
+			[MethodImpl(256)]
+		#endif
+		public void Free(IntPtr batch, int length) {
+			if (batch == IntPtr.Zero)
+				throw new ArgumentNullException("batch");
+
+			Native.sm_free_batch(nativeAllocator, batch, (IntPtr)length);
+		}
+
+		#if SMMALLOC_INLINING
+			[MethodImpl(256)]
+		#endif
 		public IntPtr Realloc(IntPtr memory, int bytesCount) {
 			return Realloc(memory, bytesCount, 0);
 		}
@@ -165,6 +185,12 @@ namespace Smmalloc {
 
 		[DllImport(nativeLibrary, CallingConvention = CallingConvention.Cdecl)]
 		internal static extern void sm_free(IntPtr allocator, IntPtr memory);
+
+		[DllImport(nativeLibrary, CallingConvention = CallingConvention.Cdecl)]
+		internal static extern void sm_free_batch(IntPtr allocator, IntPtr batch, IntPtr length);
+
+		[DllImport(nativeLibrary, CallingConvention = CallingConvention.Cdecl)]
+		internal static extern void sm_free_batch(IntPtr allocator, IntPtr[] batch, IntPtr length);
 
 		[DllImport(nativeLibrary, CallingConvention = CallingConvention.Cdecl)]
 		internal static extern IntPtr sm_realloc(IntPtr allocator, IntPtr memory, IntPtr bytesCount, IntPtr alignment);

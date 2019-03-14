@@ -664,7 +664,21 @@ namespace sm {
 	}
 
 	SMMALLOC_API INLINE void sm_free(sm_allocator allocator, void* p) {
-		return allocator->Free(p);
+		allocator->Free(p);
+	}
+
+	SMMALLOC_API INLINE void sm_free_batch(sm_allocator allocator, void** batch, size_t length) {
+		void* p;
+		size_t i;
+
+		for (i = 0; i < length; i++) {
+			p = batch[i];
+
+			if (p == nullptr)
+				continue;
+
+			allocator->Free(p);
+		}
 	}
 
 	SMMALLOC_API INLINE void* sm_realloc(sm_allocator allocator, void* p, size_t bytesCount, size_t alignment) {
