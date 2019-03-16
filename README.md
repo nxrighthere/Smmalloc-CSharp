@@ -43,6 +43,19 @@ IntPtr memory = smmalloc.Malloc(64);
 smmalloc.Free(memory);
 ```
 
+##### Work with batches of memory blocks:
+```c#
+IntPtr[] batch = new IntPtr[32];
+
+// Allocate a batch of memory
+for (int i = 0; i < batch.Length; i++) {
+	batch[i] = smmalloc.Malloc(64);
+}
+
+// Release the whole batch
+smmalloc.Free(batch);
+```
+
 ##### Write data to memory block:
 ```c#
 // Using Marshal
