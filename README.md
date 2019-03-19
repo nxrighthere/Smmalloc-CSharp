@@ -153,7 +153,7 @@ IntPtr memory = smmalloc.Malloc(entitySize * entityCount);
 Span<Entity> entities;
 
 unsafe {
-	entities = new Span<Entity>((byte*)memory, entityCount);
+	entities = new Span<Entity>((void*)memory, entityCount);
 }
 
 // Do some stuff
