@@ -66,7 +66,7 @@ for (int i = 0; i < smmalloc.Size(memory); i++) {
 }
 
 // Using Span
-Span<byte> buffer;
+Span<byte> buffer = default(Span<byte>);
 
 unsafe {
 	buffer = new Span<byte>((byte*)memory, smmalloc.Size(memory));
@@ -150,10 +150,10 @@ int entityCount = 10;
 IntPtr memory = smmalloc.Malloc(entitySize * entityCount);
 
 // Create Span using native memory block
-Span<Entity> entities;
+Span<Entity> entities = default(Span<Entity>);
 
 unsafe {
-	entities = new Span<Entity>((void*)memory, entityCount);
+	entities = new Span<Entity>((Entity*)memory, entityCount);
 }
 
 // Do some stuff
