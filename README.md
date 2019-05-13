@@ -150,7 +150,7 @@ int entityCount = 10;
 IntPtr memory = smmalloc.Malloc(entitySize * entityCount);
 
 // Create Span using native memory block
-Span<Entity> entities = default(Span<Entity>);
+Span<Entity> entities;
 
 unsafe {
 	entities = new Span<Entity>((void*)memory, entityCount);
