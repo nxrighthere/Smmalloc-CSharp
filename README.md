@@ -66,7 +66,7 @@ for (int i = 0; i < smmalloc.Size(memory); i++) {
 }
 
 // Using Span
-Span<byte> buffer = default(Span<byte>);
+Span<byte> buffer;
 
 unsafe {
 	buffer = new Span<byte>((byte*)memory, smmalloc.Size(memory));
