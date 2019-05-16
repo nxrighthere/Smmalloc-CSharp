@@ -5,8 +5,6 @@ set(SMMALLOC_STATIC "0" CACHE BOOL "Create a static library")
 set(SMMALLOC_SHARED "0" CACHE BOOL "Create a shared library")
 set(SMMALLOC_STATS "0" CACHE BOOL "Add support for stats gathering")
 
-include_directories(${PROJECT_SOURCE_DIR})
-
 if (SMMALLOC_STATS)
     add_definitions(-DSMMALLOC_STATS_SUPPORT)
 endif()
