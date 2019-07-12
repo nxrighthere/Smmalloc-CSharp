@@ -11,7 +11,10 @@ endif()
 
 if (SMMALLOC_STATIC)
     add_library(smmalloc_static STATIC smmalloc.cpp)
-    target_link_libraries(smmalloc_static)
+
+    if (WIN32)
+        SET_TARGET_PROPERTIES(smmalloc_static PROPERTIES PREFIX "")
+    endif()
 endif()
 
 if (SMMALLOC_SHARED)
@@ -24,5 +27,8 @@ if (SMMALLOC_SHARED)
     endif()
 
     add_library(smmalloc SHARED smmalloc.cpp)
-    target_link_libraries(smmalloc)
+
+    if (WIN32)
+        SET_TARGET_PROPERTIES(smmalloc PROPERTIES PREFIX "")
+    endif()
 endif()
