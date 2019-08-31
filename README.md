@@ -8,6 +8,14 @@ This is an improved version of [smmalloc](https://github.com/SergeyMakeev/smmall
 
 Using smmalloc allocator in the .NET environment helps to minimize GC pressure for allocating buffers and avoid using lock-based pools in multi-threaded systems. Modern .NET features such as [`Span<T>`](https://msdn.microsoft.com/en-us/magazine/mt814808.aspx) greatly works in tandem with smmalloc and allows conveniently manage data in native memory blocks.
 
+Building
+--------
+To build the native library appropriate software is required:
+
+For desktop platforms [CMake](https://cmake.org/download/) with GNU Make or Visual Studio.
+
+A managed assembly can be built using any available compiling platform that supports C# 3.0 or higher.
+
 Usage
 --------
 ##### Create a new smmalloc instance:
