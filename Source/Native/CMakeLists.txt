@@ -12,7 +12,7 @@ endif()
 if (SMMALLOC_STATIC)
     add_library(smmalloc_static STATIC smmalloc.cpp)
 
-    if (WIN32)
+    if (NOT LINUX)
         SET_TARGET_PROPERTIES(smmalloc_static PROPERTIES PREFIX "")
     endif()
 endif()
