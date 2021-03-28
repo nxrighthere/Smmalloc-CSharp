@@ -18,40 +18,40 @@ A managed assembly can be built using any available compiling platform that supp
 
 Usage
 --------
-##### Create a new smmalloc instance:
+##### Create a new smmalloc instance
 ```c#
 // 8 buckets, 16 MB each, 128 bytes maximum allocation size
 SmmallocInstance smmalloc = new SmmallocInstance(8, 16 * 1024 * 1024);
 ```
 
-##### Destroy the smmalloc instance and free allocated memory:
+##### Destroy the smmalloc instance and free allocated memory
 ```c#
 smmalloc.Dispose();
 ```
 
-##### Create thread cache for a current thread:
+##### Create thread cache for a current thread
 ```c#
 // 4 KB of thread cache for each bucket, hot warmup
 smmalloc.CreateThreadCache(4 * 1024, CacheWarmupOptions.Hot);
 ```
 
-##### Destroy thread cache for a current thread:
+##### Destroy thread cache for a current thread
 ```c#
 smmalloc.DestroyThreadCache();
 ```
 
-##### Allocate memory block:
+##### Allocate memory block
 ```c#
 // 64 bytes of a memory block
 IntPtr memory = smmalloc.Malloc(64);
 ```
 
-##### Release memory block:
+##### Release memory block
 ```c#
 smmalloc.Free(memory);
 ```
 
-##### Work with batches of memory blocks:
+##### Work with batches of memory blocks
 ```c#
 IntPtr[] batch = new IntPtr[32];
 
@@ -64,7 +64,7 @@ for (int i = 0; i < batch.Length; i++) {
 smmalloc.Free(batch);
 ```
 
-##### Write data to memory block:
+##### Write data to memory block
 ```c#
 // Using Marshal
 byte data = 0;
@@ -87,7 +87,7 @@ for (int i = 0; i < buffer.Length; i++) {
 }
 ```
 
-##### Read data from memory block:
+##### Read data from memory block
 ```c#
 // Using Marshal
 int sum = 0;
@@ -104,7 +104,7 @@ foreach (var value in buffer) {
 }
 ```
 
-##### Hardware accelerated operations:
+##### Hardware accelerated operations
 ```c#
 // Xor using Vector and Span
 if (Vector.IsHardwareAccelerated) {
@@ -117,7 +117,7 @@ if (Vector.IsHardwareAccelerated) {
 }
 ```
 
-##### Copy data using memory block:
+##### Copy data using memory block
 ```c#
 // Using Marshal
 byte[] data = new byte[64];
@@ -142,7 +142,7 @@ unsafe {
 }
 ```
 
-##### Custom data structures:
+##### Custom data structures
 ```c#
 // Define a custom structure
 struct Entity {
